@@ -1,6 +1,5 @@
 const trash = document.getElementById("trash");
 const bins = document.querySelectorAll(".bin");
-
 const scoreDisplay = document.getElementById("score");
 const errorDisplay = document.getElementById("errors");
 const timeDisplay = document.getElementById("time");
@@ -10,77 +9,69 @@ let errors = 0;
 let timeLeft = 60;
 let currentType = "";
 
-// Típusok
 const types = ["paper", "plastic", "metal", "mixed"];
-
-// Színek
 const colors = {
-  paper: "blue",
-  plastic: "gold",
-  metal: "gray",
-  mixed: "green"
+    paper: "blue",
+    plastic: "yellow",
+    metal: "gray",
+    mixed: "green"
 };
 
-// Új hulladék generálása
-function generateTrash() {
-  const randomType = types[Math.floor(Math.random() * types.length)];
-  currentType = randomType;
-
-  trash.style.backgroundColor = colors[randomType];
-  trash.dataset.type = randomType;
+function randomTrash() {
+    currentType = types[Math.floor(Math.random() * types.length)];
+    trash.style.backgroundColor = colors[currentType];
 }
 
-// Drag esemény
 trash.addEventListener("dragstart", (e) => {
-  e.dataTransfer.setData("text/plain", trash.dataset.type);
+    e.dataTransfer.setData("text/plain", currentType);
 });
 
-// Kukák eseményei
 bins.forEach(bin => {
-  bin.addEventListener("dragover", (e) => {
-    e.preventDefault();
-  });
+    bin.addEventListener("dragover", (e) => {
+        e.preventDefault();
+    });
 
-  bin.addEventListener("drop", (e) => {
-    e.preventDefault();
-    const droppedType = e.dataTransfer.getData("text/plain");
-    const binType = bin.dataset.type;
-    const countDisplay = bin.querySelector(".count");
+    bin.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const binType = bin.getAttribute("data-type");
 
-    if (droppedType === binType) {
-      score++;
-      scoreDisplay.textContent = score;
+        if (binType === currentType) {
+            score++;
+            scoreDisplay.textContent = score;
 
-      countDisplay.textContent = parseInt(countDisplay.textContent) + 1;
+            const countDisplay = bin.querySelector(".count");
+            countDisplay.textContent = parseInt(countDisplay.textContent) + 1;
 
-      bin.style.backgroundColor = "lightgreen";
-      setTimeout(() => bin.style.backgroundColor = "", 300);
+            bin.classList.add("feedback-correct");
+            setTimeout(() => bin.classList.remove("feedback-correct"), 300);
+        } else {
+            errors++;
+            errorDisplay.textContent = errors;
 
-      generateTrash();
-    } else {
-      errors++;
-      errorDisplay.textContent = errors;
+            bin.classList.add("feedback-wrong");
+            setTimeout(() => bin.classList.remove("feedback-wrong"), 300);
+        }
 
-      bin.style.backgroundColor = "lightcoral";
-      setTimeout(() => bin.style.backgroundColor = "", 300);
-    }
-  });
+        randomTrash();
+    });
 });
 
-// Időzítő
-const timer = setInterval(() => {
-  timeLeft--;
-  timeDisplay.textContent = timeLeft;
+function startTimer() {
+    const timer = setInterval(() => {
+        timeLeft--;
+        timeDisplay.textContent = timeLeft;
 
-  if (timeLeft <= 0) {
-    clearInterval(timer);
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            endGame();
+        }
+    }, 1000);
+}
+
+function endGame() {
     trash.style.display = "none";
-    alert(`Játék vége!\nPontszám: ${score}\nHibák: ${errors}`);
-  }
-}, 1000);
+    alert("Játék vége!\nPontszám: " + score + "\nHibák: " + errors);
+}
 
-// Kezdés
-generateTrash();
-scoreDisplay.textContent = score;
-errorDisplay.textContent = errors;
-timeDisplay.textContent = timeLeft;
+randomTrash();
+startTimer();

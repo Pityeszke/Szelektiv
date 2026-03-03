@@ -1,48 +1,50 @@
 <!DOCTYPE html>
 <html lang="hu">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szelektív hulladékgyűjtés</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>Szelektív Kuka Játék</title>
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    <div class="container">
-        <h1>🗑️ Szelektiv hulladékgyűjtés</h1>
-        
-        <div class="info">
-            <span>Pontszám: <span id="score">0</span></span>
-            <span>| Hiba: <span id="errors">50</span></span>
+
+<h1>♻ Szelektív Hulladékgyűjtő Játék</h1>
+
+<div id="gameArea">
+
+    <div id="trash" draggable="true"></div>
+
+    <div class="bins">
+        <div class="bin" data-type="paper" style="border-top-color: blue;">
+            Papír
+            <div class="count">0</div>
         </div>
 
-        <div id="gameArea" class="game-area">
-            <div class="trash" draggable="true" data-type="trash"></div>
+        <div class="bin" data-type="plastic" style="border-top-color: yellow;">
+            Műanyag
+            <div class="count">0</div>
         </div>
 
-        <div class="bins-container">
-            <div class="bin" data-type="paper">
-                <div class="bin-label">Papír</div>
-                <div class="count">0</div>
-            </div>
-            <div class="bin" data-type="plastic">
-                <div class="bin-label">Műanyag</div>
-                <div class="count">0</div>
-            </div>
-            <div class="bin" data-type="metal">
-                <div class="bin-label">Fém</div>
-                <div class="count">0</div>
-            </div>
-            <div class="bin" data-type="mixed">
-                <div class="bin-label">Vegyes</div>
-                <div class="count">0</div>
-            </div>
+        <div class="bin" data-type="metal" style="border-top-color: gray;">
+            Fém
+            <div class="count">0</div>
         </div>
 
-        <div class="time-display">
-            Idő: <span id="time">0</span>
+        <div class="bin" data-type="mixed" style="border-top-color: green;">
+            Vegyes
+            <div class="count">0</div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <div id="info">
+        Pontszám: <span id="score">0</span> |
+        Hibák: <span id="errors">0</span> |
+        Idő: <span id="time">60</span>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>

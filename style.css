@@ -1,0 +1,75 @@
+/* Basic resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+#gameArea {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  width: 800px;
+  max-width: 100%;
+  text-align: center;
+}
+#gameArea h1 {
+  margin-bottom: 10px;
+}
+#info {
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+#info span {
+  margin-right: 20px;
+}
+#trash {
+  min-height: 100px;
+  border: 1px dashed #999;
+  margin-bottom: 20px;
+  position: relative;
+}
+.trash-item {
+  width: 50px;
+  height: 50px;
+  background: yellow;
+  position: absolute;
+  cursor: grab;
+}
+#bins {
+  display: flex;
+  justify-content: space-around;
+}
+.bin {
+  width: 150px;
+  height: 120px;
+  border: 3px solid transparent;
+  background: #eee;
+  position: relative;
+  padding-top: 25px;
+}
+.bin[data-type="paper"] { border-color: blue; }
+.bin[data-type="plastic"] { border-color: yellow; }
+.bin[data-type="metal"] { border-color: gray; }
+.bin[data-type="mixed"] { border-color: green; }
+.bin .label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.bin .count {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 1.2rem;
+}
+/* simple transition for drop feedback */
+.bin.drag-over {
+  background: #ddd;
+}

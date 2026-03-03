@@ -3,11 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Szelektív hulladékgyűjtés</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="container">
+        <h1>🗑️ Szelektiv hulladékgyűjtés</h1>
+        
+        <div class="info">
+            <span>Pontszám: <span id="score">0</span></span>
+            <span>| Hiba: <span id="errors">50</span></span>
+        </div>
+
+        <div id="gameArea" class="game-area">
+            <div class="trash" draggable="true" data-type="trash"></div>
+        </div>
+
+        <div class="bins-container">
+            <div class="bin" data-type="paper">
+                <div class="bin-label">Papír</div>
+                <div class="count">0</div>
+            </div>
+            <div class="bin" data-type="plastic">
+                <div class="bin-label">Műanyag</div>
+                <div class="count">0</div>
+            </div>
+            <div class="bin" data-type="metal">
+                <div class="bin-label">Fém</div>
+                <div class="count">0</div>
+            </div>
+            <div class="bin" data-type="mixed">
+                <div class="bin-label">Vegyes</div>
+                <div class="count">0</div>
+            </div>
+        </div>
+
+        <div class="time-display">
+            Idő: <span id="time">0</span>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
